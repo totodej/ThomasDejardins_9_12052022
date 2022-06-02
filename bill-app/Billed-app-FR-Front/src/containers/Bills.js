@@ -41,8 +41,8 @@ export default class {
         .bills()
         .list()
         .then((snapshot) => {
-          const bills = snapshot
-            .sort((a, b) => (a.date < b.date ? 1 : -1))
+          let bills = snapshot
+            .sort((a, b) => (a.date > b.date ? 1 : -1))
             .map((doc) => {
               try {
                 return {
@@ -61,6 +61,9 @@ export default class {
                 };
               }
             });
+
+          bills = bills.filter((bill) => bill.amount !== null);
+          console.log("length", bills.length);
           return bills;
         });
     }
