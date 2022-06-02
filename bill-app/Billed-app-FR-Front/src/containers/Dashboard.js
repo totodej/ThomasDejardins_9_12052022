@@ -14,7 +14,7 @@ export const filteredBills = (data, status) => {
         if (typeof jest !== "undefined") {
           selectCondition = bill.status === status;
         } else {
-          /* istanbul ignore next */
+        /* istanbul ignore next */
           // in prod environment
           const userEmail = JSON.parse(localStorage.getItem("user")).email;
           selectCondition =
@@ -79,7 +79,6 @@ export default class {
     $("#arrow-icon1").click((e) => this.handleShowTickets(e, bills, 1));
     $("#arrow-icon2").click((e) => this.handleShowTickets(e, bills, 2));
     $("#arrow-icon3").click((e) => this.handleShowTickets(e, bills, 3));
-    this.getBillsAllUsers();
     new Logout({ localStorage, onNavigate });
   }
 
@@ -155,9 +154,9 @@ export default class {
       this.counter++;
     }
 
-    filteredBills(bills, getStatus(this.index)).forEach((bill) => {
-      $(`#open-bill${bill.id}`).click((e) =>
-        this.handleEditTicket(e, bill, bills)
+    bills.forEach((bill) => {
+      $(`#status-bills-container${this.index} > #open-bill${bill.id}`).click(
+        (e) => this.handleEditTicket(e, bill, bills)
       );
     });
 
